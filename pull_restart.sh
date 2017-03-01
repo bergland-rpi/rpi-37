@@ -4,7 +4,7 @@ hn=$(hostname)
 cd /home/pi/$hn
 git pull
 
-if pgrep -x "masterprogram.py" > /dev/null
+if pgrep -f "masterprogram.py" > /dev/null
 then
     echo "Running"
 else
