@@ -93,8 +93,8 @@ def writeHeader(WRTR, C):    #write a header column in master file
     WRTR.writerow(["TimeStamp", "Elapsed", "MCP9808Temp", "SHT31Temp", "Humidity", "Lux", "Lights", "Time_in_hours", "R", "G", "B", "W", "Heater"])
     C.flush()
 
-configpath="/home/pi/Pi-optimization/"+inputfile
-configcopy="/home/pi/Pi-optimization/"+inputfile+time.strftime("%Y-%m-%d")+"copy.log"
+configpath="/home/pi/"+hostname+"/"inputfile
+configcopy="/home/pi/"+hostname+"/"+inputfile+time.strftime("%Y-%m-%d")+"copy.log"
 copyfile(configpath, configcopy)
 
 #read input file on first time through program and configure
