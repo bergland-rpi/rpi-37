@@ -93,8 +93,8 @@ def writeHeader(WRTR, C):    #write a header column in master file
     WRTR.writerow(["TimeStamp", "Elapsed", "MCP9808Temp", "SHT31Temp", "Humidity", "Lux", "Lights", "Time_in_hours", "R", "G", "B", "W", "Heater"])
     C.flush()
 
-configpath="/home/pi/"+hostname+"/"inputfile
-configcopy="/home/pi/"+hostname+"/"+inputfile+time.strftime("%Y-%m-%d")+"copy.log"
+configpath=inputfile
+configcopy=inputfile+time.strftime("%Y-%m-%d")+"copy.log"
 copyfile(configpath, configcopy)
 
 #read input file on first time through program and configure
@@ -140,7 +140,7 @@ while True:
         LED_BRIGHTNESS = a["brightness"]
         strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
         strip.begin()
-        configcopy="/home/pi/Pi-optimization/"+inputfile+time.strftime("%Y-%m-%d")+"copy.log"
+        configcopy=inputfile+time.strftime("%Y-%m-%d")+"copy.log"
         copyfile(configpath,configcopy)
         programstart=time.time()
         c=makeOutFile(a["outfile_name"])
@@ -258,7 +258,7 @@ while True:
         currW=a["W"]
 
     #then check if lights should be on color2
-    elif a["color2"]=="True" and a["offTime"] <= time_in_hours < a["color2_offtime"]:
+    elif a["color2_used"]=="True" and a["offTime"] <= time_in_hours < a["color2_offtime"]:
         print 'Lights on color2!'
         lights="on, color2"
         GPIO.output(16, True)
@@ -271,7 +271,7 @@ while True:
         currW=a["W2"]
 
     #then check if lights should be on color3
-    elif a["color3"] =="True" and a["color2_offtime"] <= time_in_hours < a["color3_offtime"]:
+    elif a["color3_used"] =="True" and a["color2_offtime"] <= time_in_hours < a["color3_offtime"]:
         print ' Lights on color 3!'
         lights="on, color3"
         GPIO.output(16, True)
