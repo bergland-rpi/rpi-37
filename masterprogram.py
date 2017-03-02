@@ -328,7 +328,7 @@ while True:
     elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "True" and a["color3_offtime"] <= time_in_hours < a["Ramp_offtime"]:
         print "Ramping off color3"
         Ramp_time=a["Ramp_offtime"] - a["color3_offtime"] #total time that will be spent ramping down
-        fade=(a["Ramp_offtime"]-time_in_hours)/a["Ramp_time"] #proportion of ramping that is uncompleted
+        fade=(a["Ramp_offtime"]-time_in_hours)/Ramp_time #proportion of ramping that is uncompleted
         lights="decreasing color3"
         tempR=int(float(a["R3"])*fade) #calculate a red value based on proporition of ramping completed
         tempG=int(float(a["G3"])*fade) #calculate a green value based on proporition of ramping completed
