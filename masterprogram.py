@@ -133,6 +133,9 @@ while True:
     old=open(configcopy,"r").read()
     if new != old: #reset everything if configuration file has changed
         print "resetting"
+        email_text=hostname+"has started a new program"+new
+        email_subject=hostname+"has reset"
+        send_email("priscilla.erickson@gmail.com", email_subject, email_text)
         a=readInput(inputfile)
         convertInt(a,intlist)
         convertFloat(a,floatlist)
@@ -284,7 +287,7 @@ while True:
         currW=a["W3"]
 
     #then check for ramping off. Ramping off will occur for last used color
-    elif a["Ramp_off"] == "True" and a["color2"] == "False" and a["color3"] == "False" and a["offTime"] <= time_in_hours < a["ramp_offtime"]:
+    elif a["Ramp_off"] == "True" and a["color2_used"] == "False" and a["color3_used"] == "False" and a["offTime"] <= time_in_hours < a["ramp_offtime"]:
         print "Ramping off"
         Ramp_time=a["ramp_offtime"] - a["offTime"] #total time that will be spent ramping down
         fade=(a["ramp_offtime"]-time_in_hours)/Ramp_time #proportion of ramping that is uncompleted
@@ -303,7 +306,7 @@ while True:
         currW=tempW
 
     #ramping off if 2 colors:
-    elif a["Ramp_off"] == "True" and a["color2"] == "True" and a["color3"] == "False" and a["color2_offtime"] <= time_in_hours < a["ramp_offtime"]:
+    elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "False" and a["color2_offtime"] <= time_in_hours < a["ramp_offtime"]:
         print "Ramping off color2"
         Ramp_time=a["ramp_offtime"] - a["color2_offtime"] #total time that will be spent ramping down
         fade=(a["ramp_offtime"]-time_in_hours)/Ramp_time #proportion of ramping that is uncompleted
@@ -322,7 +325,7 @@ while True:
         currW=tempW
 
     #ramping off if 3 colors:
-    elif a["Ramp_off"] == "True" and a["color2"] == "True" and a["color3"] == "True" and a["color3_offtime"] <= time_in_hours < a["ramp_offtime"]:
+    elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "True" and a["color3_offtime"] <= time_in_hours < a["ramp_offtime"]:
         print "Ramping off color3"
         Ramp_time=a["ramp_offtime"] - a["color3_offtime"] #total time that will be spent ramping down
         fade=(a["ramp_offtime"]-time_in_hours)/a["Ramp_time"] #proportion of ramping that is uncompleted
