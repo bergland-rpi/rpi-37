@@ -306,7 +306,7 @@ while True:
         currW=tempW
 
     #ramping off if 2 colors:
-    elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "False" and a["color2_offtime"] <= time_in_hours < a["ramp_offtime"]:
+    elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "False" and a["color2_offtime"] <= time_in_hours < a["Ramp_offtime"]:
         print "Ramping off color2"
         Ramp_time=a["ramp_offtime"] - a["color2_offtime"] #total time that will be spent ramping down
         fade=(a["ramp_offtime"]-time_in_hours)/Ramp_time #proportion of ramping that is uncompleted
@@ -325,7 +325,7 @@ while True:
         currW=tempW
 
     #ramping off if 3 colors:
-    elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "True" and a["color3_offtime"] <= time_in_hours < a["ramp_offtime"]:
+    elif a["Ramp_off"] == "True" and a["color2_used"] == "True" and a["color3_used"] == "True" and a["color3_offtime"] <= time_in_hours < a["Ramp_offtime"]:
         print "Ramping off color3"
         Ramp_time=a["ramp_offtime"] - a["color3_offtime"] #total time that will be spent ramping down
         fade=(a["ramp_offtime"]-time_in_hours)/a["Ramp_time"] #proportion of ramping that is uncompleted
