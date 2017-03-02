@@ -1,6 +1,11 @@
 brightness=250
+<<<<<<< HEAD
 R=0
 G=201
+=======
+R=100
+G=200
+>>>>>>> 801599e88de4ef0cfd56df4ba221bfe1d0ff3c87
 B=200
 W=0
 LED_COUNT=24
