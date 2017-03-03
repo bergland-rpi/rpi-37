@@ -148,7 +148,7 @@ while True:
         configcopy=inputfile+time.strftime("%Y-%m-%d")+"copy.log"
         copyfile(configpath,configcopy)
         programstart=time.time()
-        outfile_name=hostname+"-restart-"+time.strftime("%Y-%m-%d")
+        outfile_name=hostname+"-restart-"+time.strftime("%Y-%m-%d")+".csv"
         c=makeOutFile(outfile_name)
         wrtr=makeOutWriteable(c)
         writeHeader(wrtr, c)
