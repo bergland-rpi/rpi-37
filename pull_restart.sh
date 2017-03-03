@@ -16,6 +16,5 @@ else
     else
     	sudo python /home/pi/$hn/restart_fail_email.py
 	echo 'program did not start'
-    else
-fi
+    fi
 fi
