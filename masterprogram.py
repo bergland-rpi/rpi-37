@@ -95,7 +95,7 @@ def writeHeader(WRTR, C):    #write a header column in master file
     C.flush()
 
 configpath=inputfile
-configcopy=inputfile+time.strftime("%Y-%m-%d")+"copy.log"
+configcopy=hostname+"-config-"+time.strftime("%Y-%m-%d")+"-copy.log"
 copyfile(configpath, configcopy)
 
 #read input file on first time through program and configure
@@ -135,8 +135,8 @@ while True:
     old=open(configcopy,"r").read()
     if new != old: #reset everything if configuration file has changed
         print "resetting"
-        email_text=hostname+"has started a new program"+new
-        email_subject=hostname+"has reset"
+        email_text=hostname+" has started a new program: "+ new
+        email_subject=hostname+" has reset"
         send_email("priscilla.erickson@gmail.com", email_subject, email_text)
         a=readInput(inputfile)
         convertInt(a,intlist)
