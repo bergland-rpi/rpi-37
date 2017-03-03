@@ -9,7 +9,8 @@ then
     echo "Running"
 else
     echo "Stopped"
-    if sudo python /home/pi/$hn/masterprogram.py /home/pi/$hn/config.txt 
+    sudo python /home/pi/$hn/masterprogram.py /home/pi/$hn/config.txt 
+    if pgrep -f "masterprogram.py" > /dev/null
     then
     	sudo python /home/pi/$hn/restart_email.py
 	echo 'program restarted'
