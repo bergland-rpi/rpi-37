@@ -117,7 +117,7 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, 
 strip.begin()
 
 #generate data files
-outfile_name=hostname+"-restart-"+time.strftime("%Y-%m-%d")
+outfile_name=hostname+"-restart-"+time.strftime("%Y-%m-%d")+".csv"
 c=makeOutFile(outfile_name)
 wrtr=makeOutWriteable(c)
 writeHeader(wrtr, c)
@@ -173,16 +173,24 @@ while True:
 
     #make a daily file if needed right after midnight when day counter has turned over
     todaysdate=time.strftime("%Y-%m-%d", now)
-    dailyfilename=hostname+"-"+todaysdate+".csv"    
-    if lastday != day or os.path.isfile(dailyfilename)==False:   
+    dailyfilename=hostname+"-"+todaysdate+".csv" 
+    if lastday == 0 and os.path.isfile(dailyfilename)==False : #program is starting for first time and file doesn't exist; make new file
         df =(open(dailyfilename, 'wb'))
         dfwrtr = csv.writer(df)
         dfwrtr.writerow(["TimeStamp", "Elapsed", "MCP9808Temp", "SHT31Temp", "Humidity", "Lux", "Lights", "Time_in_hours", "R", "G", "B", "W", "Heater"])
         df.flush()
-    else:
-        df=(open(dailyfilename, 'a'))
+    elif lastday == 0 and os.path.isfile(dailyfilename) == True :#program is starting but file already exists; append
+        df =(open(dailyfilename, 'a'))
         dfwrtr = csv.writer(df)
-
+    elif lastday != day :#day has turned over; make a new file
+        df=(open(dailyfilename, 'wb'))
+        dfwrtr = csv.writer(df)
+        dfwrtr.writerow(["TimeStamp", "Elapsed", "MCP9808Temp", "SHT31Temp", "Humidity", "Lux", "Lights", "Time_in_hours", "R", "G", "B", "W", "Heater"])
+        df.flush()
+    else:
+        df =(open(dailyfilename, 'a'))
+        dfwrtr = csv.writer(df)
+    
     #turn heat on if needed
     if a["Heat"] == "True" and a["heatOn"] <= time_in_hours < a["heatOff"]:
         GPIO.output(23, True)
