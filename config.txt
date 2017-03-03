@@ -7,7 +7,6 @@ LED_COUNT=24
 onTime=9
 offTime=19
 checkTime=60
-outfile_name=shortday_030317.csv
 highAlarm=20
 lowAlarm=9
 Pulse=False
