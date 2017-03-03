@@ -9,12 +9,12 @@ then
     echo "Running"
 else
     echo "Stopped"
-    if sudo python /home/pi/$hn/masterprogram.py /home/pi/$hn/config.txt
+    if ! sudo python /home/pi/$hn/masterprogram.py /home/pi/$hn/config.txt
     then
+    	sudo python /home/pi/$hn/restart_fail_email.py
+	echo 'program did not start'
+    else
 	sudo python /home/pi/$hn/restart_email.py
 	echo 'program restarted'
-    else
-	sudo python /home/pi/$hn/restart_fail_email.py
-	echo 'program did not start'
 fi
 fi
