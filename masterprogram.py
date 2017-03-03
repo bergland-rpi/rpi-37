@@ -15,6 +15,7 @@ import subprocess
 import smtplib
 from shutil import copyfile
 import filecmp
+import os.path
 
 #arguments will be in a separate .ini file (sys.argv[1]) which is read in and parsed to get different argument types
 inputfile=str(sys.argv[1]) #the input .ini file is given as the first argument when the python script is called
@@ -171,13 +172,16 @@ while True:
     time_in_hours=hour+minute/60+second/3600
 
     #make a daily file if needed right after midnight when day counter has turned over
-    if lastday != day:
-        todaysdate=time.strftime("%Y-%m-%d", now)
-        dailyfilename=hostname+"-"+todaysdate+".csv"
+    todaysdate=time.strftime("%Y-%m-%d", now)
+    dailyfilename=hostname+"-"+todaysdate+".csv"    
+    if lastday != day or os.path.isfile(dailyfilename)==False:   
         df =(open(dailyfilename, 'wb'))
         dfwrtr = csv.writer(df)
         dfwrtr.writerow(["TimeStamp", "Elapsed", "MCP9808Temp", "SHT31Temp", "Humidity", "Lux", "Lights", "Time_in_hours", "R", "G", "B", "W", "Heater"])
         df.flush()
+    else:
+        df=(open(dailyfilename, 'a'))
+        dfwrtr = csv.writer(df)
 
     #turn heat on if needed
     if a["Heat"] == "True" and a["heatOn"] <= time_in_hours < a["heatOff"]:
