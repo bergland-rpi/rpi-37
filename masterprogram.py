@@ -116,7 +116,8 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, 
 strip.begin()
 
 #generate data files
-c=makeOutFile(a["outfile_name"])
+outfile_name=hostname+"-restart-"+time.strftime("%Y-%m-%d")
+c=makeOutFile(outfile_name)
 wrtr=makeOutWriteable(c)
 writeHeader(wrtr, c)
 #determine program start time with current configuration
@@ -146,7 +147,8 @@ while True:
         configcopy=inputfile+time.strftime("%Y-%m-%d")+"copy.log"
         copyfile(configpath,configcopy)
         programstart=time.time()
-        c=makeOutFile(a["outfile_name"])
+        outfile_name=hostname+"-restart-"+time.strftime("%Y-%m-%d")
+        c=makeOutFile(outfile_name)
         wrtr=makeOutWriteable(c)
         writeHeader(wrtr, c)
         hasAlarmed=False
@@ -205,8 +207,8 @@ while True:
         print 'Current temp=', currtemp
         print 'High Alarm=', a["highAlarm"]
         print 'Low Alarm=', a["lowAlarm"]
-        subject=hostname+ "has a temperature problem"
-        message=hostname+ "has a temperature of " + str(currtemp)
+        subject=hostname+ " has a temperature problem"
+        message=hostname+ " has a temperature of " + str(currtemp)
         send_email("priscilla.erickson@gmail.com", subject, message)
         print "Email sent"
         hasAlarmed=True
