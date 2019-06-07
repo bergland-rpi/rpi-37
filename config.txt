@@ -4,8 +4,8 @@ G=0
 B=0
 W=100
 LED_COUNT=64
-onTime=7.9
-offTime=23.9
+onTime=10
+offTime=18
 deltaOn=0
 deltaOff=0
 goalLux=150
@@ -40,4 +40,3 @@ R3=200
 G3=0
 B3=200
 W3=0
-
