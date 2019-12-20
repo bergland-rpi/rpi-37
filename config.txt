@@ -1,11 +1,11 @@
 brightness=250
-R=100
-G=0
+R=0
+G=100
 B=0
 W=0
 LED_COUNT=64
 onTime=8
-offTime=18
+offTime=14
 deltaOn=0
 deltaOff=0
 goalLux=150
